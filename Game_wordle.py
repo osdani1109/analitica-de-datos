@@ -132,11 +132,15 @@ class Game_wordle:
         """
         filter_words = []
         regex = '['+letters+']+'
-        for word in database:
-            if re.findall(regex,word):
-                continue
-            filter_words.append(word)
-        return filter_words
+        print("--------------------------------------",len(letters))
+        if len(letters) > 0:
+            for word in database:
+                if re.findall(regex,word):
+                    continue
+                filter_words.append(word)
+            return filter_words
+        else:
+            return database
 
     def filter_words_by_letter_positions(self,database,positions,word_sent):
         """
@@ -147,15 +151,132 @@ class Game_wordle:
         las palabras o buscar conincidencias en las palabras con la letra que se busca
         """
         filter_words = []
-        if(len(positions)!=0):
+        if(len(positions)!=0)and(len(positions)<len(word_sent)):
             print("posiciones: ",positions)
-            for pos in positions:
-                for word in database:
-                    if ''.join(word[pos]) in ''.join(word_sent[pos]):
+            
+            for word in database:
+                if len(positions) == 1:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                        (word != word_sent):
+                        filter_words.append(word)
+
+                elif len(positions) == 2:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+
+                elif len(positions) == 3:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(positions) == 4:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(positions) == 5:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(positions) == 6:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(positions) == 7:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word[positions[6]] == word_sent[positions[6]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(positions) == 8:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word[positions[6]] == word_sent[positions[6]]) and\
+                         (word[positions[7]] == word_sent[positions[7]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(positions) == 9:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word[positions[6]] == word_sent[positions[6]]) and\
+                         (word[positions[7]] == word_sent[positions[7]]) and\
+                         (word[positions[8]] == word_sent[positions[8]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(positions) == 10:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word[positions[6]] == word_sent[positions[6]]) and\
+                         (word[positions[7]] == word_sent[positions[7]]) and\
+                         (word[positions[8]] == word_sent[positions[8]]) and\
+                         (word[positions[9]] == word_sent[positions[9]]) and\
+                         (word != word_sent):
                         filter_words.append(word)
             return filter_words
         else:
             return database
+    
+    def search_word_game(self,filter_data,word_post):
+        # se envia la palabra al post
+        for i in range(6):
+            print("--------------------------------------------------------------------------------")
+            print("intento: ",i)
+            print("--------------------------------------------------------------------------------")
+            self.request_post(word_post)
+            # se buscan las letras que no estan en la palabra
+            wrong_letters, letters_true = self.wrong_letters(word_post)
+            print("letras que no estan en la palabra: ",wrong_letters)
+            # se filtra las palabras que no tienen las letras que se buscan
+            filter_data = self.filter_words_by_letters(filter_data, wrong_letters)
+            print("palabras filtradas\n: ",filter_data)
+            print(len(filter_data))
+            # filtrar palabras por posciones
+            filter_data = self.filter_words_by_letter_positions(filter_data,letters_true,word_post)
+            print("palabras filtradas por posiciones\n: ",filter_data)
+            print(len(filter_data))
+            # se escogen una palabra al azar de las filtradas
+            word_post = self.random_word_filters(filter_data)
+            print("palabra al azar: ",word_post) # muestra la palabra escogida  
+            if(len(word_post) == len(letters_true)):
+                print("Se encontro la palabra, en el intento: ",i+1)
+                break
 
 if __name__ == "__main__":
 
@@ -174,29 +295,11 @@ if __name__ == "__main__":
     print(filter_data) # muestra las palabras filtradas
     # se escogen una palabra al azar de las filtradas
     filter_data = filter_data["Words"].tolist()
-    print(filter_data)
+    print("Cantidad de palabras",len(filter_data),"-------------------------")
     word_post = game.random_word_filters(filter_data)
     print("palabra al azar: ",word_post) # muestra la palabra escogida
-    # se envia la palabra al post
-    for i in range(8):
-        print("--------------------------------------------------------------------------------")
-        print("intento: ",i)
-        print("--------------------------------------------------------------------------------")
-        game.request_post(word_post)
-        # se buscan las letras que no estan en la palabra
-        wrong_letters, letters_true = game.wrong_letters(word_post)
-        print("letras que no estan en la palabra: ",wrong_letters)
-        # se filtra las palabras que no tienen las letras que se buscan
-        new_filter = game.filter_words_by_letters(filter_data, wrong_letters)
-        print("palabras filtradas\n: ",new_filter)
-        print(len(new_filter))
-        # filtrar palabras por posciones
-        new_filter = game.filter_words_by_letter_positions(new_filter,letters_true,word_post)
-        print("palabras filtradas por posiciones\n: ",new_filter)
-        print(len(new_filter))
-        # se escogen una palabra al azar de las filtradas
-        word_post = game.random_word_filters(new_filter)
-        print("palabra al azar: ",word_post) # muestra la palabra escogida  
-        # se guarda las pabras filtradas en una base de datos
-        filter_data = new_filter  
+    # se busca la palabra en el juego
+    game.search_word_game(filter_data, word_post)
+    
+        
     
