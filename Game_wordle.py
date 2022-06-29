@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import re
-
+import random
 
 class Game_wordle:
     def __init__(self, endpoint_get, endpoint_post, database):
@@ -84,12 +84,12 @@ class Game_wordle:
                                     (self.dataframe["Consonts"] == self.response_get["consonants"]))]
         return data_filter
 
-    def random_word(self, dataframe_filter):
+    def random_word_filters(self, filter_words):
         """
-        Esta función escoge una palabra al azar de las filtradas
+        Esta funcion se encarga de escoger una palabra al azar de las filtradas
         para ser enviada al post
         """
-        word = dataframe_filter["Words"].sample()
+        word = random.choice(filter_words)
         return word
 
     def request_post(self, response):
@@ -101,6 +101,7 @@ class Game_wordle:
         self.response_post["position_array"] = array_position
         self.response_post["right_letters_in_wrong_positions"] = array_letters
         # right_letters_in_wrong_positions
+
     def wrong_letters(self,word):
         """
         Esta funcion recibe como parametro la palabra que se envio 
@@ -110,16 +111,17 @@ class Game_wordle:
         # corresponde la areglo de posiciones correctas de letras de la palabra 
         array_position = np.array(self.response_post["position_array"]) 
         result_true = np.where(array_position == "true")
+        print("tamaño:",len(result_true[0]))
         result_false = np.where(array_position == "false")
         # se transforma la palabra para que pueda ser iterada 
-        word = ''.join(word.tolist())
+        word = ''.join(word)
 
         remove_words_with_letters = []
         for i in result_false[0]:
             if word[i] not in ''.join(self.response_post["right_letters_in_wrong_positions"]):
                 remove_words_with_letters.append(word[i])
     
-        return ''.join(remove_words_with_letters)
+        return ''.join(remove_words_with_letters), result_true[0]
 
     def filter_words_by_letters(self,database, letters):
         """
@@ -136,6 +138,25 @@ class Game_wordle:
             filter_words.append(word)
         return filter_words
 
+    def filter_words_by_letter_positions(self,database,positions,word_sent):
+        """
+        Esta funcion se encarga de filtrar las palabras que tiene letras que no corresponden a
+        la palabra que se esta buscando 
+        database corresponde a las palabras 
+        positions es vecgtor que corresponde a las posiciones de las letras que no se deben filtrar en 
+        las palabras o buscar conincidencias en las palabras con la letra que se busca
+        """
+        filter_words = []
+        if(len(positions)!=0):
+            print("posiciones: ",positions)
+            for pos in positions:
+                for word in database:
+                    if ''.join(word[pos]) in ''.join(word_sent[pos]):
+                        filter_words.append(word)
+            return filter_words
+        else:
+            return database
+
 if __name__ == "__main__":
 
     endpoint_get = "direccion"
@@ -148,13 +169,34 @@ if __name__ == "__main__":
     # se hace la solicitud para comenzar un nuevo juego
     request_game = game.star_game()
     game.create_dataframe()
-    # se filtra la palabras segun la palabra a adivinar 
+    # se filtra la palabras segun las caracteristicas de la palabra a adivinar 
     filter_data = game.filter_words()
+    print(filter_data) # muestra las palabras filtradas
+    # se escogen una palabra al azar de las filtradas
+    filter_data = filter_data["Words"].tolist()
     print(filter_data)
-    word_post = game.random_word(filter_data)
-    game.request_post(word_post)
-    wrong_letters = game.wrong_letters(word_post)
-    print("letras no permitidas: ", wrong_letters)
-    new_filter = game.filter_words_by_letters(filter_data["Words"].tolist(), wrong_letters)
-    print(len(new_filter))
-    print(word_post)
+    word_post = game.random_word_filters(filter_data)
+    print("palabra al azar: ",word_post) # muestra la palabra escogida
+    # se envia la palabra al post
+    for i in range(8):
+        print("--------------------------------------------------------------------------------")
+        print("intento: ",i)
+        print("--------------------------------------------------------------------------------")
+        game.request_post(word_post)
+        # se buscan las letras que no estan en la palabra
+        wrong_letters, letters_true = game.wrong_letters(word_post)
+        print("letras que no estan en la palabra: ",wrong_letters)
+        # se filtra las palabras que no tienen las letras que se buscan
+        new_filter = game.filter_words_by_letters(filter_data, wrong_letters)
+        print("palabras filtradas\n: ",new_filter)
+        print(len(new_filter))
+        # filtrar palabras por posciones
+        new_filter = game.filter_words_by_letter_positions(new_filter,letters_true,word_post)
+        print("palabras filtradas por posiciones\n: ",new_filter)
+        print(len(new_filter))
+        # se escogen una palabra al azar de las filtradas
+        word_post = game.random_word_filters(new_filter)
+        print("palabra al azar: ",word_post) # muestra la palabra escogida  
+        # se guarda las pabras filtradas en una base de datos
+        filter_data = new_filter  
+    
