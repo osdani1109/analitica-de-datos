@@ -3,6 +3,8 @@ import pandas as pd
 import re
 import random
 import requests
+import json
+import time
 
 class Game_wordle:
     def __init__(self, endpoint_get, endpoint_post, database, user, password):
@@ -24,6 +26,14 @@ class Game_wordle:
         # credenciales 
         self.user = user
         self.password = password
+        # lista para guardar los intentos del juego
+        self.list_attempts = []
+        # varialbes para calcular tiempos 
+        self.dict_times = {}
+        self.start_time_get = 0
+        self.end_time_get = 0
+        self.start_time_post = 0
+        self.end_time_post = 0
 
     def star_game(self):
         """
@@ -40,6 +50,8 @@ class Game_wordle:
         print("respuesta del servidor: ",self.response_get)
         print("json:\n ",self.response_get.json())
         self.response_get = self.response_get.json()
+        # se almacena la respuesta en una lista
+        self.list_attempts.append(self.response_get)
         
     def quantity_vawols_consonats(self, database):
         """
@@ -115,6 +127,8 @@ class Game_wordle:
         print("json:\n ",self.response_post.json())
 
         self.response_post = self.response_post.json()
+        # se almacena la respuesta en una lista
+        self.list_attempts.append(self.response_post)
 
     def wrong_letters(self,word):
         """
@@ -538,6 +552,16 @@ class Game_wordle:
         else:
             return database
 
+    def save_games(self):
+        """
+        Se guardan los intentos ue se hicieron en el juego en 
+        un archivo json y txt con el nombre response_game.json y response_game.txt
+        """
+        with open('response_game.json', 'a') as filejson:
+            json.dump(self.list_attempts, filejson,indent=5,separators=(',',': '))
+        with open('response_game.txt', 'a') as filetxt:
+            filetxt.write(str(self.list_attempts)+'\n')
+    
     def search_word_game(self,filter_data,word_post):
         # se envia la palabra al post
         for i in range(5):
@@ -552,6 +576,8 @@ class Game_wordle:
             print("--------------------------------------------------------------------------------")
             if(len(word_post) == len(letters_true)):
                 print("Se encontro la palabra: "+ word_post +" en el intento: ",i+1)
+                # se guarda los juegos en un archivo json y un txt
+                self.save_games()
                 break
             # se filtra la las palabras que no estan en la posicion correcta
             filter_data = self.filter_words_by_letter_positions_wrong(filter_data, letters_position_wrong, word_post)
@@ -578,12 +604,13 @@ if __name__ == "__main__":
     # se carga la base de datos
     with open("final_data_cleaned.txt", "r", encoding='utf8') as file:
         database = file.read()
+    
     # se crea el nuevo juego
     game = Game_wordle(endpoint_get, endpoint_post, database, user, password)
-    # se hace la solicitud a la API para comezar el juego y obtener los parametros de la palabra
-    game.star_game()
     # se crea una tabla con los parametros obtenidos
     game.create_dataframe()
+    # se hace la solicitud a la API para comezar el juego y obtener los parametros de la palabra
+    game.star_game()
     # se filtra la palabras segun las caracteristicas de la palabra dada por el servidor
     filter_data = game.filter_words()
     print(filter_data) # muestra las palabras filtradas
