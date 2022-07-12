@@ -24,9 +24,10 @@ class Add_data_postgres:
           # self.cur.close()
           print("Add data success")
      
-     def insert_data_result(self, dict_param,dict_result, attempts_time):
+     def insert_data_result(self, primary_key, dict_param,dict_result, attempts_time):
           """
           Esta funcion se encarga de agregar los datos del diccionario a la base de datos
+          primary_key: es la clave primaria de la tabla parametros_del_juego
           dic_data es el diccionario con los siguientes datos a agregar:
           id: id del juego que se esta jugando, string
           word_sent: palabra que se envio en el intento
@@ -51,21 +52,27 @@ class Add_data_postgres:
           amount_of_false = np.where(array_position == False)
           amount_of_false = len(amount_of_false[0])
           # se agrega los datos a la base de datos
-          self.cur.execute("INSERT INTO resultados(id,word_sent,score,\
+          self.cur.execute("INSERT INTO resultados(id_game,id,word_sent,score,\
                datetime,position_array,amount_of_true,amount_of_false,\
                array_letters_in_wrong_positions,amount_letters_in_wrong_positions,\
                current_attemps,attempt_time)\
-               VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", \
-                (dict_param['id'], dict_result['word_sent'], dict_result['score'],\
+               VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", \
+                (primary_key, dict_param['id'], dict_result['word_sent'], dict_result['score'],\
                 dict_result['try_datetime'], dict_result['position_array'], amount_of_true,\
                 amount_of_false, dict_result['right_letters_in_wrong_positions'],\
                 amount_letters_in_wrong_position, dict_result['current_attemps'],\
                 attempts_time,))
           # se guarda los cambios en la base de datos
           self.con.commit()
-          self.cur.close()
+          
           print("Add data success")
-       
+     
+     def close_connection(self):
+          """
+          esta funcion cierra la conexion con la base de datos
+          """
+          self.con.close()
+          print("Connection closed")
 
      def select_table(self,name_table):
           """
@@ -78,19 +85,16 @@ class Add_data_postgres:
           print(rows)
           cursor.close()
           return rows
+     def select_colomn_table(self,name_table,name_colomn):
+          """
+          esta funcion selecciona todos los datos de la tabla
+          """
+          self.con = self.con
+          cursor = self.con.cursor()
+          cursor.execute("SELECT %s FROM %s" % (name_colomn,name_table))
+          rows = cursor.fetchall()
+          print(rows)
+          return rows
 
-dic_data = {'id': '62bdb48c8d949c9a49ffa7fc', 'length_word': 12, 'vowels': 5, 'consonants': 7}
-dic_data2 = {'word_sent': 'describiendo', 'score': 0.08333333333333333, 
-'try_datetime': '2022-06-30T14:34:53.700117', 
-'position_array': [False, False, False, False, False, False, False, False, False, True, False, False], 
-'right_letters_in_wrong_positions': ['s', 'r', 'i', 'o'], 'current_attemps': 1}
-save_data = Add_data_postgres("wordle_hqiu",
-                               "osdani1109", 
-                               "xlZC8coyZEuyIrxbCYSs79BxmsyLRLGW",
-                               "ohio-postgres.render.com",
-                               "5432")
 
-save_data.insert_data_param(dic_data,0.2)
-save_data.insert_data_result(dic_data,dic_data2,0.2)
-save_data.select_table("resultados")
 
