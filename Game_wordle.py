@@ -5,6 +5,7 @@ import random
 import requests
 import json
 import time
+import Add_data_postgres as adp
 
 class Game_wordle:
     def __init__(self, endpoint_get, endpoint_post, database, user, password):
@@ -29,7 +30,7 @@ class Game_wordle:
         # lista para guardar los intentos del juego
         self.list_attempts = []
         # varialbes para calcular tiempos 
-        self.dict_times = {}
+        self.times = []
         self.start_time_get = 0
         self.end_time_get = 0
         self.start_time_post = 0
@@ -44,14 +45,12 @@ class Game_wordle:
         ● vowels: Número de vocales en la palabra
         ● consonants: Número de consonantes en la palabra
         """
-        # se hace la solicitud al servidor
+        # se hace la solicitud al servidor para iniciar el juego
         self.response_get = requests.get(self.endpoint_get, auth = (self.user,self.password))
+        # se guarda el tiempo de inicio de la solicitud
+        self.start_time_get = time.time()
         # respuesta del servidor en formato json
-        print("respuesta del servidor: ",self.response_get)
-        print("json:\n ",self.response_get.json())
         self.response_get = self.response_get.json()
-        # se almacena la respuesta en una lista
-        self.list_attempts.append(self.response_get)
         
     def quantity_vawols_consonats(self, database):
         """
@@ -83,10 +82,8 @@ class Game_wordle:
         database: es la base de datos de palabras
         """
         self.dataframe["Words"] = self.database.split(" ")
-        self.dataframe["Word length"] = [
-            len(w) for w in self.dataframe["Words"]]
-        quantity_vawols, quantity_consonats = self.quantity_vawols_consonats(
-            self.dataframe["Words"])
+        self.dataframe["Word length"] = [len(w) for w in self.dataframe["Words"]]
+        quantity_vawols, quantity_consonats = self.quantity_vawols_consonats(self.dataframe["Words"])
         self.dataframe["Vawols"] = quantity_vawols
         self.dataframe["Consonts"] = quantity_consonats
 
@@ -121,11 +118,19 @@ class Game_wordle:
         {
          "result_word": "string"
         }
+        respuesta del servidor en formato json
+        {
+            "word_sent": "string",
+            "score": float,
+            "try_datetime": datetime,
+            "position_array": [false,true,false,false,false],
+            "right_letters_in_wrong_positions": ["string","string"]
+        }
         """
         self.response_post = requests.post(self.endpoint_post, json = response, auth = (self.user,self.password))
-        print("respuesta del servidor: ",self.response_post)
-        print("json:\n ",self.response_post.json())
-
+        # se guarda el tiempo de inicio de la solicitud
+        self.start_time_post = time.time()
+        # respuesta del servidor en formato json
         self.response_post = self.response_post.json()
         # se almacena la respuesta en una lista
         self.list_attempts.append(self.response_post)
@@ -140,14 +145,13 @@ class Game_wordle:
         letters_position_wrong: entrega las letras que estan en la palabra pero en la posicion incorrecta
         """
         # corresponde la areglo de posiciones correctas de letras de la palabra 
-        print("respuesta del servidor: ",self.response_post['position_array']) 
         array_position = np.array(self.response_post['position_array'])
         # corresponde la areglo de posiciones correctas de letras de la palabra
         result_true = np.where(array_position == True)
-        print("aciertos:",result_true[0])
+
         # corresponde la areglo de posiciones incorrectas de letras de la palabra
         result_false = np.where(array_position == False)
-        print("fallos:",result_false[0])
+
         # se transforma la palabra para que pueda ser iterada 
         word = ''.join(word)
 
@@ -255,7 +259,6 @@ class Game_wordle:
         """
         filter_words = []
         regex = '['+letters+']+'
-        print("--------------------------------------",len(letters))
         if len(letters) > 0:
             for word in database:
                 if re.findall(regex,word):
@@ -269,13 +272,12 @@ class Game_wordle:
         """
         Esta funcion se encarga de filtrar las palabras que tiene letras que no corresponden a
         la palabra que se esta buscando 
-        database corresponde a las palabras 
-        positions es vecgtor que corresponde a las posiciones de las letras que no se deben filtrar en 
+        database: corresponde a las palabras 
+        positions: es vector que corresponde a las posiciones de las letras que no se deben filtrar en 
         las palabras o buscar conincidencias en las palabras con la letra que se busca
         """
         filter_words = []
         if(len(positions)!=0)and(len(positions)<len(word_sent)):
-            print("posiciones: ",positions)
             for word in database:
                 if len(positions) == 1:
                     if (word[positions[0]] == word_sent[positions[0]]) and\
@@ -555,43 +557,80 @@ class Game_wordle:
     def save_games(self):
         """
         Se guardan los intentos ue se hicieron en el juego en 
-        un archivo json y txt con el nombre response_game.json y response_game.txt
+        un archivo  txt con el nombre  response_game.txt
         """
-        with open('response_game.json', 'a') as filejson:
-            json.dump(self.list_attempts, filejson,indent=5,separators=(',',': '))
+        dictionary_times = {}
+        
+        self.end_time_get = time.time()
+        # se almacena el tiempo de respuesta en una lista data por el get_response
+        
+        self.times.append(self.end_time_get- self.start_time_get)
+
+        # se alamcena las respuesta en la base de datos postgresql
+        # se crea un objeto de la clase Postgresql
+        save_data = adp.Add_data_postgres("wordle_hqiu",
+                                    "osdani1109", 
+                                    "xlZC8coyZEuyIrxbCYSs79BxmsyLRLGW",
+                                    "ohio-postgres.render.com",
+                                    "5432")
+        save_data.insert_data_param(self.response_get, self.times.pop())
+        # se hace la consulta de la primaria key de la base de datos
+        pk = save_data.select_colomn_table("parametros_del_juego", "id_game")
+        pk = pk.pop()
+        pk = list(pk).pop()
+        print(pk)
+       
+        for i,dict_ in reversed(list(enumerate(self.list_attempts))):
+            save_data.insert_data_result(pk,self.response_get, dict_, self.times[i])
+        # se almacena la respuesta en una lista data por el get_response
+        self.list_attempts.append(self.response_get)
+        # se almacena los tiempos en un dcitionario
+        dictionary_times['time'] = self.times
+        self.list_attempts.append(dictionary_times)
+
         with open('response_game.txt', 'a') as filetxt:
             filetxt.write(str(self.list_attempts)+'\n')
     
     def search_word_game(self,filter_data,word_post):
         # se envia la palabra al post
         for i in range(5):
+            #{
+             #   "result_word": "string"
+            #}
             self.request_post_word["result_word"] = word_post
             self.request_post(self.request_post_word)
             
             # se buscan las letras que no estan en la palabra
             wrong_letters, letters_true, letters_position_wrong = self.wrong_letters(word_post)
-            print("--------------------------------------------------------------------------------")
-            print("letras que no estan en la palabra: ",wrong_letters)
-            print("letras que no estan en la posicion correcta: ",letters_position_wrong)
-            print("--------------------------------------------------------------------------------")
+            
             if(len(word_post) == len(letters_true)):
                 print("Se encontro la palabra: "+ word_post +" en el intento: ",i+1)
+                # se almacena el tiempo de respuesta en una lista data por el post_response
+                data = self.end_time_post - self.start_time_post
+                if data < 0:
+                    data = 0.0
+                else:
+                    data = data
+                self.times.append(data)
                 # se guarda los juegos en un archivo json y un txt
                 self.save_games()
                 break
             # se filtra la las palabras que no estan en la posicion correcta
             filter_data = self.filter_words_by_letter_positions_wrong(filter_data, letters_position_wrong, word_post)
             # palabras filtradas que no estan en la posicion correcta
-            print("palabras por posiciones incorrectas:\n ",len(filter_data))
+            
             # se filtra las palabras que no tienen las letras que se buscan
             filter_data = self.filter_words_by_letters(filter_data, wrong_letters)
-            print("palabras filtradas\n: ",len(filter_data))
+            
             # filtrar palabras por posciones
             filter_data = self.filter_words_by_letter_positions(filter_data,letters_true,word_post)
-            print("palabras filtradas por posiciones\n: ",len(filter_data))
+            
             # se escogen una palabra al azar de las filtradas
             word_post = self.random_word_filters(filter_data)
-            print("palabra al azar: ",word_post,"---------------------------------") # muestra la palabra escogida  
+            self.end_time_post = time.time()
+            # se almacena el tiempo de respuesta en una lista data por el post_response
+            self.times.append(self.end_time_post - self.start_time_post)
+             
             
 
 if __name__ == "__main__":
@@ -613,12 +652,11 @@ if __name__ == "__main__":
     game.star_game()
     # se filtra la palabras segun las caracteristicas de la palabra dada por el servidor
     filter_data = game.filter_words()
-    print(filter_data) # muestra las palabras filtradas
     
     filter_data = filter_data["Words"].tolist()
-    print("Cantidad de palabras",len(filter_data),"-------------------------")
+   
     # se escogen una palabra al azar de las filtradas
     word_post = game.random_word_filters(filter_data)
-    print("palabra al azar: ",word_post) # muestra la palabra escogida
+
     # se busca la palabra en el juego
     game.search_word_game(filter_data, word_post)
