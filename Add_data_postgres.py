@@ -7,7 +7,7 @@ class Add_data_postgres:
                 password=password, host=host, port=port)
         self.cur = self.con.cursor()
 
-     def insert_data_param(self, dict_param, play_time):
+     def insert_data_param(self, dict_param, play_time,status):
           """
           esta funcion agrega los datos a la base de datos
           dict_param: diccionario con los datos a agregar
@@ -17,9 +17,10 @@ class Add_data_postgres:
           consonants: cantidad de consonantes del dato a agregar, entero
           las anteriores son las claves del diccionario
           """
-          self.cur.execute("INSERT INTO parametros_del_juego(id,length_word,amount_vawels,amount_consonants,play_time)\
-          VALUES(%s, %s, %s, %s, %s)", (dict_param['id'], dict_param['length_word'], dict_param['vowels'],\
-          dict_param['consonants'], play_time,))
+          self.cur.execute("INSERT INTO parametros_del_juego(id,amount_vawels,\
+          amount_consonants,play_time,status) VALUES(%s, %s, %s, %s, %s)", \
+          (dict_param['id'], dict_param['vowels'],\
+          dict_param['consonants'], play_time,status))
           self.con.commit()
           # self.cur.close()
           print("Add data success")
@@ -44,24 +45,16 @@ class Add_data_postgres:
           """
           # se mira la cantidad de letras incorretes en la palabra
           amount_letters_in_wrong_position = len(dict_result['right_letters_in_wrong_positions'])
-          array_position = np.array(dict_result['position_array'])
-          # se mira la cantidad de letras correctas
-          amount_of_true = np.where(array_position == True)
-          amount_of_true = len(amount_of_true[0])
-          # se mira la cantidad de letras incorrectas
-          amount_of_false = np.where(array_position == False)
-          amount_of_false = len(amount_of_false[0])
+         
           # se agrega los datos a la base de datos
-          self.cur.execute("INSERT INTO resultados(id_game,id,word_sent,score,\
-               datetime,position_array,amount_of_true,amount_of_false,\
-               array_letters_in_wrong_positions,amount_letters_in_wrong_positions,\
+          self.cur.execute("INSERT INTO intentos(id_game,id,word_sent,score,\
+               datetime,position_array,amount_letters_in_wrong_positions,\
                current_attemps,attempt_time)\
-               VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", \
+               VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", \
                 (primary_key, dict_param['id'], dict_result['word_sent'], dict_result['score'],\
-                dict_result['try_datetime'], dict_result['position_array'], amount_of_true,\
-                amount_of_false, dict_result['right_letters_in_wrong_positions'],\
+                dict_result['try_datetime'], dict_result['position_array'],\
                 amount_letters_in_wrong_position, dict_result['current_attemps'],\
-                attempts_time,))
+                attempts_time))
           # se guarda los cambios en la base de datos
           self.con.commit()
           
@@ -82,9 +75,9 @@ class Add_data_postgres:
           cursor = self.con.cursor()
           cursor.execute("SELECT * FROM %s" % name_table)
           rows = cursor.fetchall()
-          print(rows)
           cursor.close()
           return rows
+
      def select_colomn_table(self,name_table,name_colomn):
           """
           esta funcion selecciona todos los datos de la tabla
@@ -93,7 +86,6 @@ class Add_data_postgres:
           cursor = self.con.cursor()
           cursor.execute("SELECT %s FROM %s" % (name_colomn,name_table))
           rows = cursor.fetchall()
-          print(rows)
           return rows
 
 
