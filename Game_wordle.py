@@ -47,11 +47,12 @@ class Game_wordle:
         """
         # se hace la solicitud al servidor para iniciar el juego
         self.response_get = requests.get(self.endpoint_get, auth = (self.user,self.password))
+        print("respuesta del servidor",self.response_get)
         # se guarda el tiempo de inicio de la solicitud
         self.start_time_get = time.time()
-        # respuesta del servidor en formato json
+        # se  trasnforma en un json response_get
         self.response_get = self.response_get.json()
-        
+
     def quantity_vawols_consonats(self, database):
         """
         Esta funcion cuenta la cantidad de vocales y consontates
@@ -554,7 +555,7 @@ class Game_wordle:
         else:
             return database
 
-    def save_games(self):
+    def save_games(self,status):
         """
         Se guardan los intentos ue se hicieron en el juego en 
         un archivo  txt con el nombre  response_game.txt
@@ -565,15 +566,16 @@ class Game_wordle:
         # se almacena el tiempo de respuesta en una lista data por el get_response
         
         self.times.append(self.end_time_get- self.start_time_get)
+        print(self.times)
 
         # se alamcena las respuesta en la base de datos postgresql
         # se crea un objeto de la clase Postgresql
         save_data = adp.Add_data_postgres("wordle_hqiu",
                                     "osdani1109", 
                                     "xlZC8coyZEuyIrxbCYSs79BxmsyLRLGW",
-                                    "ohio-postgres.render.com",
+                                    "dpg-cb3nsk441lsfos6mr3ug-a.ohio-postgres.render.com",
                                     "5432")
-        save_data.insert_data_param(self.response_get, self.times.pop())
+        save_data.insert_data_param(self.response_get, self.times.pop(),status)
         # se hace la consulta de la primaria key de la base de datos
         pk = save_data.select_colomn_table("parametros_del_juego", "id_game")
         pk = pk.pop()
@@ -606,6 +608,7 @@ class Game_wordle:
             if(len(word_post) == len(letters_true)):
                 print("Se encontro la palabra: "+ word_post +" en el intento: ",i+1)
                 # se almacena el tiempo de respuesta en una lista data por el post_response
+                self.end_time_post = time.time()
                 data = self.end_time_post - self.start_time_post
                 if data < 0:
                     data = 0.0
@@ -613,7 +616,7 @@ class Game_wordle:
                     data = data
                 self.times.append(data)
                 # se guarda los juegos en un archivo json y un txt
-                self.save_games()
+                self.save_games("ganado")
                 break
             # se filtra la las palabras que no estan en la posicion correcta
             filter_data = self.filter_words_by_letter_positions_wrong(filter_data, letters_position_wrong, word_post)
@@ -630,33 +633,7 @@ class Game_wordle:
             self.end_time_post = time.time()
             # se almacena el tiempo de respuesta en una lista data por el post_response
             self.times.append(self.end_time_post - self.start_time_post)
-             
-            
+        
+        if(len(word_post) != len(letters_true)):
+            self.save_games("perdido")
 
-if __name__ == "__main__":
-    # direccion del servidor
-    endpoint_get = "https://7b8uflffq0.execute-api.us-east-1.amazonaws.com/game/get_params"
-    endpoint_post = "https://7b8uflffq0.execute-api.us-east-1.amazonaws.com/game/check_results"
-    # credenciales de acceso
-    user = "daniel.rodriguez"
-    password = "24ccc748da3a42edb624f0721875ef6c"
-    # se carga la base de datos
-    with open("final_data_cleaned.txt", "r", encoding='utf8') as file:
-        database = file.read()
-    
-    # se crea el nuevo juego
-    game = Game_wordle(endpoint_get, endpoint_post, database, user, password)
-    # se crea una tabla con los parametros obtenidos
-    game.create_dataframe()
-    # se hace la solicitud a la API para comezar el juego y obtener los parametros de la palabra
-    game.star_game()
-    # se filtra la palabras segun las caracteristicas de la palabra dada por el servidor
-    filter_data = game.filter_words()
-    
-    filter_data = filter_data["Words"].tolist()
-   
-    # se escogen una palabra al azar de las filtradas
-    word_post = game.random_word_filters(filter_data)
-
-    # se busca la palabra en el juego
-    game.search_word_game(filter_data, word_post)
