@@ -212,41 +212,171 @@ class Game_wordle:
 
             elif len(result_true[0]) == 7:
                 if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
-                    (word[i] != word[result_true[0][0]]) and\
-                    (word[i] != word[result_true[0][1]]) and\
-                    (word[i] != word[result_true[0][2]]) and\
-                    (word[i] != word[result_true[0][3]]) and\
-                    (word[i] != word[result_true[0][4]]) and\
-                    (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
                     (word[i] != word[result_true[0][6]]):
                     remove_words_with_letters.append(word[i])
             
             elif len(result_true[0]) == 8:
                 if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
-                    (word[i] != word[result_true[0][0]]) and\
-                    (word[i] != word[result_true[0][1]]) and\
-                    (word[i] != word[result_true[0][2]]) and\
-                    (word[i] != word[result_true[0][3]]) and\
-                    (word[i] != word[result_true[0][4]]) and\
-                    (word[i] != word[result_true[0][5]]) and\
-                    (word[i] != word[result_true[0][6]]) and\
-                    (word[i] != word[result_true[0][7]]):
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]):
                     remove_words_with_letters.append(word[i])
 
             elif len(result_true[0]) == 9:
                 if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
-                    (word[i] != word[result_true[0][0]]) and\
-                    (word[i] != word[result_true[0][1]]) and\
-                    (word[i] != word[result_true[0][2]]) and\
-                    (word[i] != word[result_true[0][3]]) and\
-                    (word[i] != word[result_true[0][4]]) and\
-                    (word[i] != word[result_true[0][5]]) and\
-                    (word[i] != word[result_true[0][6]]) and\
-                    (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
                     (word[i] != word[result_true[0][8]]):
+
                     remove_words_with_letters.append(word[i])   
             
-            if (word[i] in ''.join(self.response_post['right_letters_in_wrong_positions'])) :
+            elif len(result_true[0]) == 10:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]):
+
+                    remove_words_with_letters.append(word[i])
+            
+            elif len(result_true[0]) == 11:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]) and\
+                    (word[i] != word[result_true[0][10]]):
+
+                    remove_words_with_letters.append(word[i])
+            
+            elif len(result_true[0]) == 12:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]) and\
+                    (word[i] != word[result_true[0][10]]) and (word[i] != word[result_true[0][11]]):
+
+                    remove_words_with_letters.append(word[i])
+
+            elif len(result_true[0]) == 13:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]) and\
+                    (word[i] != word[result_true[0][10]]) and (word[i] != word[result_true[0][11]]) and\
+                    (word[i] != word[result_true[0][12]]):
+
+                    remove_words_with_letters.append(word[i])
+
+            elif len(result_true[0]) == 14:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]) and\
+                    (word[i] != word[result_true[0][10]]) and (word[i] != word[result_true[0][11]]) and\
+                    (word[i] != word[result_true[0][12]]) and (word[i] != word[result_true[0][13]]):
+
+                    remove_words_with_letters.append(word[i])
+
+            elif len(result_true[0]) == 15:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]) and\
+                    (word[i] != word[result_true[0][10]]) and (word[i] != word[result_true[0][11]]) and\
+                    (word[i] != word[result_true[0][12]]) and (word[i] != word[result_true[0][13]]) and\
+                    (word[i] != word[result_true[0][14]]):
+
+                    remove_words_with_letters.append(word[i])
+
+            elif len(result_true[0]) == 16:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]) and\
+                    (word[i] != word[result_true[0][10]]) and (word[i] != word[result_true[0][11]]) and\
+                    (word[i] != word[result_true[0][12]]) and (word[i] != word[result_true[0][13]]) and\
+                    (word[i] != word[result_true[0][14]]) and (word[i] != word[result_true[0][15]]):
+
+                    remove_words_with_letters.append(word[i])
+
+            elif len(result_true[0]) == 17:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]) and\
+                    (word[i] != word[result_true[0][10]]) and (word[i] != word[result_true[0][11]]) and\
+                    (word[i] != word[result_true[0][12]]) and (word[i] != word[result_true[0][13]]) and\
+                    (word[i] != word[result_true[0][14]]) and (word[i] != word[result_true[0][15]]) and\
+                    (word[i] != word[result_true[0][16]]):
+
+                    remove_words_with_letters.append(word[i])
+
+            elif len(result_true[0]) == 18:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]) and\
+                    (word[i] != word[result_true[0][10]]) and (word[i] != word[result_true[0][11]]) and\
+                    (word[i] != word[result_true[0][12]]) and (word[i] != word[result_true[0][13]]) and\
+                    (word[i] != word[result_true[0][14]]) and (word[i] != word[result_true[0][15]]) and\
+                    (word[i] != word[result_true[0][16]]) and (word[i] != word[result_true[0][17]]):
+
+                    remove_words_with_letters.append(word[i])
+
+            elif len(result_true[0]) == 19:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]) and\
+                    (word[i] != word[result_true[0][10]]) and (word[i] != word[result_true[0][11]]) and\
+                    (word[i] != word[result_true[0][12]]) and (word[i] != word[result_true[0][13]]) and\
+                    (word[i] != word[result_true[0][14]]) and (word[i] != word[result_true[0][15]]) and\
+                    (word[i] != word[result_true[0][16]]) and (word[i] != word[result_true[0][17]]) and\
+                    (word[i] != word[result_true[0][18]]):
+
+                    remove_words_with_letters.append(word[i])
+
+            elif len(result_true[0]) == 20:
+                if word[i] not in ''.join(self.response_post['right_letters_in_wrong_positions']) and\
+                    (word[i] != word[result_true[0][0]]) and (word[i] != word[result_true[0][1]]) and\
+                    (word[i] != word[result_true[0][2]]) and (word[i] != word[result_true[0][3]]) and\
+                    (word[i] != word[result_true[0][4]]) and (word[i] != word[result_true[0][5]]) and\
+                    (word[i] != word[result_true[0][6]]) and (word[i] != word[result_true[0][7]]) and\
+                    (word[i] != word[result_true[0][8]]) and (word[i] != word[result_true[0][9]]) and\
+                    (word[i] != word[result_true[0][10]]) and (word[i] != word[result_true[0][11]]) and\
+                    (word[i] != word[result_true[0][12]]) and (word[i] != word[result_true[0][13]]) and\
+                    (word[i] != word[result_true[0][14]]) and (word[i] != word[result_true[0][15]]) and\
+                    (word[i] != word[result_true[0][16]]) and (word[i] != word[result_true[0][17]]) and\
+                    (word[i] != word[result_true[0][18]]) and (word[i] != word[result_true[0][19]]):
+
+                    remove_words_with_letters.append(word[i])   
+
+            if (word[i] in ''.join(self.response_post['right_letters_in_wrong_positions'])):
                 letters_position_wrong.append(i)
     
         return ''.join(remove_words_with_letters), result_true[0], letters_position_wrong
@@ -440,6 +570,136 @@ class Game_wordle:
                          (word[positions[13]] == word_sent[positions[13]]) and\
                          (word != word_sent):
                         filter_words.append(word)
+                
+                elif len(positions) == 15:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word[positions[6]] == word_sent[positions[6]]) and\
+                         (word[positions[7]] == word_sent[positions[7]]) and\
+                         (word[positions[8]] == word_sent[positions[8]]) and\
+                         (word[positions[9]] == word_sent[positions[9]]) and\
+                         (word[positions[10]] == word_sent[positions[10]]) and\
+                         (word[positions[11]] == word_sent[positions[11]]) and\
+                         (word[positions[12]] == word_sent[positions[12]]) and\
+                         (word[positions[13]] == word_sent[positions[13]]) and\
+                         (word[positions[14]] == word_sent[positions[14]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(positions) == 16:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word[positions[6]] == word_sent[positions[6]]) and\
+                         (word[positions[7]] == word_sent[positions[7]]) and\
+                         (word[positions[8]] == word_sent[positions[8]]) and\
+                         (word[positions[9]] == word_sent[positions[9]]) and\
+                         (word[positions[10]] == word_sent[positions[10]]) and\
+                         (word[positions[11]] == word_sent[positions[11]]) and\
+                         (word[positions[12]] == word_sent[positions[12]]) and\
+                         (word[positions[13]] == word_sent[positions[13]]) and\
+                         (word[positions[14]] == word_sent[positions[14]]) and\
+                         (word[positions[15]] == word_sent[positions[15]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+
+                elif len(positions) == 17:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word[positions[6]] == word_sent[positions[6]]) and\
+                         (word[positions[7]] == word_sent[positions[7]]) and\
+                         (word[positions[8]] == word_sent[positions[8]]) and\
+                         (word[positions[9]] == word_sent[positions[9]]) and\
+                         (word[positions[10]] == word_sent[positions[10]]) and\
+                         (word[positions[11]] == word_sent[positions[11]]) and\
+                         (word[positions[12]] == word_sent[positions[12]]) and\
+                         (word[positions[13]] == word_sent[positions[13]]) and\
+                         (word[positions[14]] == word_sent[positions[14]]) and\
+                         (word[positions[15]] == word_sent[positions[15]]) and\
+                         (word[positions[16]] == word_sent[positions[16]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+
+                elif len(positions) == 18:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word[positions[6]] == word_sent[positions[6]]) and\
+                         (word[positions[7]] == word_sent[positions[7]]) and\
+                         (word[positions[8]] == word_sent[positions[8]]) and\
+                         (word[positions[9]] == word_sent[positions[9]]) and\
+                         (word[positions[10]] == word_sent[positions[10]]) and\
+                         (word[positions[11]] == word_sent[positions[11]]) and\
+                         (word[positions[12]] == word_sent[positions[12]]) and\
+                         (word[positions[13]] == word_sent[positions[13]]) and\
+                         (word[positions[14]] == word_sent[positions[14]]) and\
+                         (word[positions[15]] == word_sent[positions[15]]) and\
+                         (word[positions[16]] == word_sent[positions[16]]) and\
+                         (word[positions[17]] == word_sent[positions[17]]) and\
+                         (word != word_sent):
+                        filter_words.append(word) 
+
+                elif len(positions) == 19:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word[positions[6]] == word_sent[positions[6]]) and\
+                         (word[positions[7]] == word_sent[positions[7]]) and\
+                         (word[positions[8]] == word_sent[positions[8]]) and\
+                         (word[positions[9]] == word_sent[positions[9]]) and\
+                         (word[positions[10]] == word_sent[positions[10]]) and\
+                         (word[positions[11]] == word_sent[positions[11]]) and\
+                         (word[positions[12]] == word_sent[positions[12]]) and\
+                         (word[positions[13]] == word_sent[positions[13]]) and\
+                         (word[positions[14]] == word_sent[positions[14]]) and\
+                         (word[positions[15]] == word_sent[positions[15]]) and\
+                         (word[positions[16]] == word_sent[positions[16]]) and\
+                         (word[positions[17]] == word_sent[positions[17]]) and\
+                         (word[positions[18]] == word_sent[positions[18]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+
+                elif len(positions) == 20:
+                    if (word[positions[0]] == word_sent[positions[0]]) and\
+                         (word[positions[1]] == word_sent[positions[1]]) and\
+                         (word[positions[2]] == word_sent[positions[2]]) and\
+                         (word[positions[3]] == word_sent[positions[3]]) and\
+                         (word[positions[4]] == word_sent[positions[4]]) and\
+                         (word[positions[5]] == word_sent[positions[5]]) and\
+                         (word[positions[6]] == word_sent[positions[6]]) and\
+                         (word[positions[7]] == word_sent[positions[7]]) and\
+                         (word[positions[8]] == word_sent[positions[8]]) and\
+                         (word[positions[9]] == word_sent[positions[9]]) and\
+                         (word[positions[10]] == word_sent[positions[10]]) and\
+                         (word[positions[11]] == word_sent[positions[11]]) and\
+                         (word[positions[12]] == word_sent[positions[12]]) and\
+                         (word[positions[13]] == word_sent[positions[13]]) and\
+                         (word[positions[14]] == word_sent[positions[14]]) and\
+                         (word[positions[15]] == word_sent[positions[15]]) and\
+                         (word[positions[16]] == word_sent[positions[16]]) and\
+                         (word[positions[17]] == word_sent[positions[17]]) and\
+                         (word[positions[18]] == word_sent[positions[18]]) and\
+                         (word[positions[19]] == word_sent[positions[19]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+
             return filter_words
         else:
             return database
@@ -551,6 +811,198 @@ class Game_wordle:
                          (word != word_sent):
                         filter_words.append(word)
 
+                elif len(letters_position_wrong) == 11:
+                    if (word[letters_position_wrong[0]] != word_sent[letters_position_wrong[0]]) and\
+                         (word[letters_position_wrong[1]] != word_sent[letters_position_wrong[1]]) and\
+                         (word[letters_position_wrong[2]] != word_sent[letters_position_wrong[2]]) and\
+                         (word[letters_position_wrong[3]] != word_sent[letters_position_wrong[3]]) and\
+                         (word[letters_position_wrong[4]] != word_sent[letters_position_wrong[4]]) and\
+                         (word[letters_position_wrong[5]] != word_sent[letters_position_wrong[5]]) and\
+                         (word[letters_position_wrong[6]] != word_sent[letters_position_wrong[6]]) and\
+                         (word[letters_position_wrong[7]] != word_sent[letters_position_wrong[7]]) and\
+                         (word[letters_position_wrong[8]] != word_sent[letters_position_wrong[8]]) and\
+                         (word[letters_position_wrong[9]] != word_sent[letters_position_wrong[9]]) and\
+                         (word[letters_position_wrong[10]] != word_sent[letters_position_wrong[10]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(letters_position_wrong) == 12:
+                    if (word[letters_position_wrong[0]] != word_sent[letters_position_wrong[0]]) and\
+                         (word[letters_position_wrong[1]] != word_sent[letters_position_wrong[1]]) and\
+                         (word[letters_position_wrong[2]] != word_sent[letters_position_wrong[2]]) and\
+                         (word[letters_position_wrong[3]] != word_sent[letters_position_wrong[3]]) and\
+                         (word[letters_position_wrong[4]] != word_sent[letters_position_wrong[4]]) and\
+                         (word[letters_position_wrong[5]] != word_sent[letters_position_wrong[5]]) and\
+                         (word[letters_position_wrong[6]] != word_sent[letters_position_wrong[6]]) and\
+                         (word[letters_position_wrong[7]] != word_sent[letters_position_wrong[7]]) and\
+                         (word[letters_position_wrong[8]] != word_sent[letters_position_wrong[8]]) and\
+                         (word[letters_position_wrong[9]] != word_sent[letters_position_wrong[9]]) and\
+                         (word[letters_position_wrong[10]] != word_sent[letters_position_wrong[10]]) and\
+                         (word[letters_position_wrong[11]] != word_sent[letters_position_wrong[11]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+
+                elif len(letters_position_wrong) == 13:
+                    if (word[letters_position_wrong[0]] != word_sent[letters_position_wrong[0]]) and\
+                         (word[letters_position_wrong[1]] != word_sent[letters_position_wrong[1]]) and\
+                         (word[letters_position_wrong[2]] != word_sent[letters_position_wrong[2]]) and\
+                         (word[letters_position_wrong[3]] != word_sent[letters_position_wrong[3]]) and\
+                         (word[letters_position_wrong[4]] != word_sent[letters_position_wrong[4]]) and\
+                         (word[letters_position_wrong[5]] != word_sent[letters_position_wrong[5]]) and\
+                         (word[letters_position_wrong[6]] != word_sent[letters_position_wrong[6]]) and\
+                         (word[letters_position_wrong[7]] != word_sent[letters_position_wrong[7]]) and\
+                         (word[letters_position_wrong[8]] != word_sent[letters_position_wrong[8]]) and\
+                         (word[letters_position_wrong[9]] != word_sent[letters_position_wrong[9]]) and\
+                         (word[letters_position_wrong[10]] != word_sent[letters_position_wrong[10]]) and\
+                         (word[letters_position_wrong[11]] != word_sent[letters_position_wrong[11]]) and\
+                         (word[letters_position_wrong[12]] != word_sent[letters_position_wrong[12]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+
+                elif len(letters_position_wrong) == 14:
+                    if (word[letters_position_wrong[0]] != word_sent[letters_position_wrong[0]]) and\
+                         (word[letters_position_wrong[1]] != word_sent[letters_position_wrong[1]]) and\
+                         (word[letters_position_wrong[2]] != word_sent[letters_position_wrong[2]]) and\
+                         (word[letters_position_wrong[3]] != word_sent[letters_position_wrong[3]]) and\
+                         (word[letters_position_wrong[4]] != word_sent[letters_position_wrong[4]]) and\
+                         (word[letters_position_wrong[5]] != word_sent[letters_position_wrong[5]]) and\
+                         (word[letters_position_wrong[6]] != word_sent[letters_position_wrong[6]]) and\
+                         (word[letters_position_wrong[7]] != word_sent[letters_position_wrong[7]]) and\
+                         (word[letters_position_wrong[8]] != word_sent[letters_position_wrong[8]]) and\
+                         (word[letters_position_wrong[9]] != word_sent[letters_position_wrong[9]]) and\
+                         (word[letters_position_wrong[10]] != word_sent[letters_position_wrong[10]]) and\
+                         (word[letters_position_wrong[11]] != word_sent[letters_position_wrong[11]]) and\
+                         (word[letters_position_wrong[12]] != word_sent[letters_position_wrong[12]]) and\
+                         (word[letters_position_wrong[13]] != word_sent[letters_position_wrong[13]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+
+                elif len(letters_position_wrong) == 15:
+                    if (word[letters_position_wrong[0]] != word_sent[letters_position_wrong[0]]) and\
+                         (word[letters_position_wrong[1]] != word_sent[letters_position_wrong[1]]) and\
+                         (word[letters_position_wrong[2]] != word_sent[letters_position_wrong[2]]) and\
+                         (word[letters_position_wrong[3]] != word_sent[letters_position_wrong[3]]) and\
+                         (word[letters_position_wrong[4]] != word_sent[letters_position_wrong[4]]) and\
+                         (word[letters_position_wrong[5]] != word_sent[letters_position_wrong[5]]) and\
+                         (word[letters_position_wrong[6]] != word_sent[letters_position_wrong[6]]) and\
+                         (word[letters_position_wrong[7]] != word_sent[letters_position_wrong[7]]) and\
+                         (word[letters_position_wrong[8]] != word_sent[letters_position_wrong[8]]) and\
+                         (word[letters_position_wrong[9]] != word_sent[letters_position_wrong[9]]) and\
+                         (word[letters_position_wrong[10]] != word_sent[letters_position_wrong[10]]) and\
+                         (word[letters_position_wrong[11]] != word_sent[letters_position_wrong[11]]) and\
+                         (word[letters_position_wrong[12]] != word_sent[letters_position_wrong[12]]) and\
+                         (word[letters_position_wrong[13]] != word_sent[letters_position_wrong[13]]) and\
+                         (word[letters_position_wrong[14]] != word_sent[letters_position_wrong[14]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+
+                elif len(letters_position_wrong) == 16:
+                    if (word[letters_position_wrong[0]] != word_sent[letters_position_wrong[0]]) and\
+                         (word[letters_position_wrong[1]] != word_sent[letters_position_wrong[1]]) and\
+                         (word[letters_position_wrong[2]] != word_sent[letters_position_wrong[2]]) and\
+                         (word[letters_position_wrong[3]] != word_sent[letters_position_wrong[3]]) and\
+                         (word[letters_position_wrong[4]] != word_sent[letters_position_wrong[4]]) and\
+                         (word[letters_position_wrong[5]] != word_sent[letters_position_wrong[5]]) and\
+                         (word[letters_position_wrong[6]] != word_sent[letters_position_wrong[6]]) and\
+                         (word[letters_position_wrong[7]] != word_sent[letters_position_wrong[7]]) and\
+                         (word[letters_position_wrong[8]] != word_sent[letters_position_wrong[8]]) and\
+                         (word[letters_position_wrong[9]] != word_sent[letters_position_wrong[9]]) and\
+                         (word[letters_position_wrong[10]] != word_sent[letters_position_wrong[10]]) and\
+                         (word[letters_position_wrong[11]] != word_sent[letters_position_wrong[11]]) and\
+                         (word[letters_position_wrong[12]] != word_sent[letters_position_wrong[12]]) and\
+                         (word[letters_position_wrong[13]] != word_sent[letters_position_wrong[13]]) and\
+                         (word[letters_position_wrong[14]] != word_sent[letters_position_wrong[14]]) and\
+                         (word[letters_position_wrong[15]] != word_sent[letters_position_wrong[15]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+
+                elif len(letters_position_wrong) == 17:
+                    if (word[letters_position_wrong[0]] != word_sent[letters_position_wrong[0]]) and\
+                         (word[letters_position_wrong[1]] != word_sent[letters_position_wrong[1]]) and\
+                         (word[letters_position_wrong[2]] != word_sent[letters_position_wrong[2]]) and\
+                         (word[letters_position_wrong[3]] != word_sent[letters_position_wrong[3]]) and\
+                         (word[letters_position_wrong[4]] != word_sent[letters_position_wrong[4]]) and\
+                         (word[letters_position_wrong[5]] != word_sent[letters_position_wrong[5]]) and\
+                         (word[letters_position_wrong[6]] != word_sent[letters_position_wrong[6]]) and\
+                         (word[letters_position_wrong[7]] != word_sent[letters_position_wrong[7]]) and\
+                         (word[letters_position_wrong[8]] != word_sent[letters_position_wrong[8]]) and\
+                         (word[letters_position_wrong[9]] != word_sent[letters_position_wrong[9]]) and\
+                         (word[letters_position_wrong[10]] != word_sent[letters_position_wrong[10]]) and\
+                         (word[letters_position_wrong[11]] != word_sent[letters_position_wrong[11]]) and\
+                         (word[letters_position_wrong[12]] != word_sent[letters_position_wrong[12]]) and\
+                         (word[letters_position_wrong[13]] != word_sent[letters_position_wrong[13]]) and\
+                         (word[letters_position_wrong[14]] != word_sent[letters_position_wrong[14]]) and\
+                         (word[letters_position_wrong[15]] != word_sent[letters_position_wrong[15]]) and\
+                         (word[letters_position_wrong[16]] != word_sent[letters_position_wrong[16]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(letters_position_wrong) == 18:
+                    if (word[letters_position_wrong[0]] != word_sent[letters_position_wrong[0]]) and\
+                         (word[letters_position_wrong[1]] != word_sent[letters_position_wrong[1]]) and\
+                         (word[letters_position_wrong[2]] != word_sent[letters_position_wrong[2]]) and\
+                         (word[letters_position_wrong[3]] != word_sent[letters_position_wrong[3]]) and\
+                         (word[letters_position_wrong[4]] != word_sent[letters_position_wrong[4]]) and\
+                         (word[letters_position_wrong[5]] != word_sent[letters_position_wrong[5]]) and\
+                         (word[letters_position_wrong[6]] != word_sent[letters_position_wrong[6]]) and\
+                         (word[letters_position_wrong[7]] != word_sent[letters_position_wrong[7]]) and\
+                         (word[letters_position_wrong[8]] != word_sent[letters_position_wrong[8]]) and\
+                         (word[letters_position_wrong[9]] != word_sent[letters_position_wrong[9]]) and\
+                         (word[letters_position_wrong[10]] != word_sent[letters_position_wrong[10]]) and\
+                         (word[letters_position_wrong[11]] != word_sent[letters_position_wrong[11]]) and\
+                         (word[letters_position_wrong[12]] != word_sent[letters_position_wrong[12]]) and\
+                         (word[letters_position_wrong[13]] != word_sent[letters_position_wrong[13]]) and\
+                         (word[letters_position_wrong[14]] != word_sent[letters_position_wrong[14]]) and\
+                         (word[letters_position_wrong[15]] != word_sent[letters_position_wrong[15]]) and\
+                         (word[letters_position_wrong[16]] != word_sent[letters_position_wrong[16]]) and\
+                         (word[letters_position_wrong[17]] != word_sent[letters_position_wrong[17]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(letters_position_wrong) == 19:
+                    if (word[letters_position_wrong[0]] != word_sent[letters_position_wrong[0]]) and\
+                         (word[letters_position_wrong[1]] != word_sent[letters_position_wrong[1]]) and\
+                         (word[letters_position_wrong[2]] != word_sent[letters_position_wrong[2]]) and\
+                         (word[letters_position_wrong[3]] != word_sent[letters_position_wrong[3]]) and\
+                         (word[letters_position_wrong[4]] != word_sent[letters_position_wrong[4]]) and\
+                         (word[letters_position_wrong[5]] != word_sent[letters_position_wrong[5]]) and\
+                         (word[letters_position_wrong[6]] != word_sent[letters_position_wrong[6]]) and\
+                         (word[letters_position_wrong[7]] != word_sent[letters_position_wrong[7]]) and\
+                         (word[letters_position_wrong[8]] != word_sent[letters_position_wrong[8]]) and\
+                         (word[letters_position_wrong[9]] != word_sent[letters_position_wrong[9]]) and\
+                         (word[letters_position_wrong[10]] != word_sent[letters_position_wrong[10]]) and\
+                         (word[letters_position_wrong[11]] != word_sent[letters_position_wrong[11]]) and\
+                         (word[letters_position_wrong[12]] != word_sent[letters_position_wrong[12]]) and\
+                         (word[letters_position_wrong[13]] != word_sent[letters_position_wrong[13]]) and\
+                         (word[letters_position_wrong[14]] != word_sent[letters_position_wrong[14]]) and\
+                         (word[letters_position_wrong[15]] != word_sent[letters_position_wrong[15]]) and\
+                         (word[letters_position_wrong[16]] != word_sent[letters_position_wrong[16]]) and\
+                         (word[letters_position_wrong[17]] != word_sent[letters_position_wrong[17]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
+                
+                elif len(letters_position_wrong) == 20:
+                    if (word[letters_position_wrong[0]] != word_sent[letters_position_wrong[0]]) and\
+                         (word[letters_position_wrong[1]] != word_sent[letters_position_wrong[1]]) and\
+                         (word[letters_position_wrong[2]] != word_sent[letters_position_wrong[2]]) and\
+                         (word[letters_position_wrong[3]] != word_sent[letters_position_wrong[3]]) and\
+                         (word[letters_position_wrong[4]] != word_sent[letters_position_wrong[4]]) and\
+                         (word[letters_position_wrong[5]] != word_sent[letters_position_wrong[5]]) and\
+                         (word[letters_position_wrong[6]] != word_sent[letters_position_wrong[6]]) and\
+                         (word[letters_position_wrong[7]] != word_sent[letters_position_wrong[7]]) and\
+                         (word[letters_position_wrong[8]] != word_sent[letters_position_wrong[8]]) and\
+                         (word[letters_position_wrong[9]] != word_sent[letters_position_wrong[9]]) and\
+                         (word[letters_position_wrong[10]] != word_sent[letters_position_wrong[10]]) and\
+                         (word[letters_position_wrong[11]] != word_sent[letters_position_wrong[11]]) and\
+                         (word[letters_position_wrong[12]] != word_sent[letters_position_wrong[12]]) and\
+                         (word[letters_position_wrong[13]] != word_sent[letters_position_wrong[13]]) and\
+                         (word[letters_position_wrong[14]] != word_sent[letters_position_wrong[14]]) and\
+                         (word[letters_position_wrong[15]] != word_sent[letters_position_wrong[15]]) and\
+                         (word[letters_position_wrong[16]] != word_sent[letters_position_wrong[16]]) and\
+                         (word[letters_position_wrong[17]] != word_sent[letters_position_wrong[17]]) and\
+                         (word[letters_position_wrong[18]] != word_sent[letters_position_wrong[18]]) and\
+                         (word != word_sent):
+                        filter_words.append(word)
             return filter_words
         else:
             return database
