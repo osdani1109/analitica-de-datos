@@ -451,6 +451,7 @@ class Games_wordle:
         database: corresponde a las palabras 
         positions: es vector que corresponde a las posiciones de las letras que no se deben filtrar en 
         las palabras o buscar conincidencias en las palabras con la letra que se busca
+        return: una lista de palabras que no contienen letras que no corresponden a la palabra que se esta buscando
         """
         filter_words = []
         if(len(positions)!=0)and(len(positions)<len(word_sent)):
@@ -1056,11 +1057,13 @@ class Games_wordle:
         """
         crea un data frame con los datos de los filtrados 
         filter_words: lista de palabras filtradas
+        return: dataframe_with_words_filter
         """
         dataframe_with_words_filter = pd.DataFrame(filter_words, columns=['word'])
         return dataframe_with_words_filter
 
     def search_word_game(self,filter_data,word_post):
+        # se calcula el escore de cada letra y se guarda en un diccionario
         dictionary_score = self.calculate_dict_letter_score(self.database.split(' '))
         # se envia la palabra al post
         for i in range(5):
@@ -1095,8 +1098,13 @@ class Games_wordle:
             # filtrar palabras por posciones
             filter_data = self.filter_words_by_letter_positions(filter_data,letters_true,word_post)
             
+            # se crea un dataframe con las palabras filtradas
+            dataframe = self.create_dataframe_with_words_filter(filter_data)
+            # se calcula el escore de cada palabra 
+            dataframe = self.calculate_highest_scoring_word(dataframe,dictionary_score,"Words")
+
             # se escogen una palabra al azar de las filtradas
-            word_post = self.random_word_filters(filter_data)
+            word_post = self.choose_word_with_highest_score(dataframe)
             self.end_time_post = time.time()
             # se almacena el tiempo de respuesta en una lista data por el post_response
             self.times.append(self.end_time_post - self.start_time_post)
