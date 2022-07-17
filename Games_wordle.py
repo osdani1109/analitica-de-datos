@@ -1109,7 +1109,7 @@ class Games_wordle:
                     data = data
                 self.times.append(data)
                 # se guarda los juegos en un archivo json y un txt
-                #self.save_games("ganado")
+                self.save_games("ganado")
                 break
             # se filtra la las palabras que no estan en la posicion correcta
             filter_data = self.filter_words_by_letter_positions_wrong(filter_data, letters_position_wrong, word_post)
@@ -1133,7 +1133,7 @@ class Games_wordle:
             self.times.append(self.end_time_post - self.start_time_post)
         
         if(len(word_post) != len(letters_true)):
-            #self.save_games("perdido")
+            self.save_games("perdido")
             print("No se encontro la palabra: "+ word_post)
 
 if __name__ == "__main__":
