@@ -3,21 +3,9 @@ import pandas as pd
 import numpy as np
 import re
 import time
+import requests
+import Add_data_postgres as adp
 
-def calculate_highest_scoring_word(word_list,dic_letter_score):
-    """
-    Esta funcion calcula el puntaje de cada una de las palabras de un dataframe
-    word_list: lista de palabras
-    dic_letter_score: diccionario con los puntajes de las letras
-    return: lista con los puntajes de cada palabra
-    """
-    word_score = []
-    for word in word_list:
-        score = 0
-        for letter in word:
-            score += dic_letter_score[letter]
-        word_score.append(word_score)
-    return word_score
 
 class Games_wordle:
     def __init__(self, endpoint_get, endpoint_post, database, user, password):
@@ -48,7 +36,7 @@ class Games_wordle:
         self.start_time_post = 0
         self.end_time_post = 0
 
-    def star_game(self):
+    def start_game(self):
         """
         para comenzar el juego se pide la palabra al servidor
         el serividor devuelve en un archivo json con lo siguiente:
@@ -1059,8 +1047,43 @@ class Games_wordle:
         filter_words: lista de palabras filtradas
         return: dataframe_with_words_filter
         """
-        dataframe_with_words_filter = pd.DataFrame(filter_words, columns=['word'])
+        dataframe_with_words_filter = pd.DataFrame(filter_words, columns=["Words"])
         return dataframe_with_words_filter
+
+    def save_games(self,status):
+        """
+        Se guardan los intentos ue se hicieron en el juego en 
+        un archivo  txt con el nombre  response_game.txt
+        """
+        dictionary_times = {}
+        
+        self.end_time_get = time.time()
+        # se almacena el tiempo de respuesta en una lista data por el get_response
+        
+        self.times.append(self.end_time_get- self.start_time_get)
+        print(self.times)
+
+        # se alamcena las respuesta en la base de datos postgresql
+        # se crea un objeto de la clase Postgresql
+        save_data = adp.Add_data_postgres("wordle_hqiu",
+                                    "osdani1109", 
+                                    "xlZC8coyZEuyIrxbCYSs79BxmsyLRLGW",
+                                    "dpg-cb3nsk441lsfos6mr3ug-a.ohio-postgres.render.com",
+                                    "5432")
+        save_data.insert_data_param(self.response_get, self.times.pop(),status)
+        # se hace la consulta de la primaria key de la base de datos
+        pk = save_data.select_colomn_table("parametros_del_juego", "id_game")
+        pk = pk.pop()
+        pk = list(pk).pop()
+        print(pk)
+       
+        for i,dict_ in reversed(list(enumerate(self.list_attempts))):
+            save_data.insert_data_result(pk,self.response_get, dict_, self.times[i])
+        # se almacena la respuesta en una lista data por el get_response
+        self.list_attempts.append(self.response_get)
+        # se almacena los tiempos en un dcitionario
+        dictionary_times['time'] = self.times
+        self.list_attempts.append(dictionary_times)
 
     def search_word_game(self,filter_data,word_post):
         # se calcula el escore de cada letra y se guarda en un diccionario
@@ -1137,9 +1160,6 @@ if __name__ == "__main__":
     # se filtra la palabras segun las caracteristicas de la palabra dada por el servidor
     dataframe = game.filter_words()
     # se escoge la plabra con mayor score
-    word_post = game.choose_word_with_highest_score(filter_data)
+    word_post = game.choose_word_with_highest_score(dataframe)
     # se comienza hacer los intetos
     game.search_word_game(dataframe["Words"].tolist(),word_post)
-
-    
-
