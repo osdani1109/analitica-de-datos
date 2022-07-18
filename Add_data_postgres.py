@@ -17,7 +17,7 @@ class Add_data_postgres:
           consonants: cantidad de consonantes del dato a agregar, entero
           las anteriores son las claves del diccionario
           """
-          self.cur.execute("INSERT INTO parametros_del_juego(id,amount_vawels,\
+          self.cur.execute("INSERT INTO juegos(id,amount_vawels,\
           amount_consonants,play_time,status) VALUES(%s, %s, %s, %s, %s)", \
           (dict_param['id'], dict_param['vowels'],\
           dict_param['consonants'], play_time,status))
@@ -28,7 +28,7 @@ class Add_data_postgres:
      def insert_data_result(self, primary_key, dict_param,dict_result, attempts_time):
           """
           Esta funcion se encarga de agregar los datos del diccionario a la base de datos
-          primary_key: es la clave primaria de la tabla parametros_del_juego
+          primary_key: es la clave primaria de la tabla juegos
           dic_data es el diccionario con los siguientes datos a agregar:
           id: id del juego que se esta jugando, string
           word_sent: palabra que se envio en el intento
