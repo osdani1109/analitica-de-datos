@@ -1072,7 +1072,7 @@ class Games_wordle:
                                     "5432")
         save_data.insert_data_param(self.response_get, self.times.pop(),status)
         # se hace la consulta de la primaria key de la base de datos
-        pk = save_data.select_colomn_table("parametros_del_juego", "id_game")
+        pk = save_data.select_colomn_table("juegos", "id_game")
         pk = pk.pop()
         pk = list(pk).pop()
         print(pk)
