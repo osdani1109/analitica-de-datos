@@ -4,10 +4,6 @@
 4,2,"62ccde59ffeaf90b48f39051","fisionable",1,"2022-07-12T02:37:16.268293","{true,true,true,true,true,true,true,true,true,true}",0,3,0
 5,2,"62ccde59ffeaf90b48f39051","fusionando",0.6,"2022-07-12T02:37:15.486290","{true,false,true,true,true,true,true,false,false,false}",0,2,0.001997232437133789
 6,2,"62ccde59ffeaf90b48f39051","monetarios",0.2,"2022-07-12T02:37:14.704010","{false,false,false,false,false,false,false,false,false,false}",6,1,0.0099945068359375
-7,1,"62cc7a6f15e8ce9a5cbe1508","julian",1,"2022-07-11T19:30:58.438205","{true,true,true,true,true,true}",0,4,0.0010249886322021484
-8,1,"62cc7a6f15e8ce9a5cbe1508","julius",0.6666667,"2022-07-11T19:30:57.660301","{true,true,true,true,false,false}",0,3,0.0010449886322021484
-9,1,"62cc7a6f15e8ce9a5cbe1508","cabria",0.33333334,"2022-07-11T19:30:56.900558","{false,false,false,false,false,false}",2,2,0.0009987354278564453
-10,1,"62cc7a6f15e8ce9a5cbe1508","metano",0.33333334,"2022-07-11T19:30:56.158212","{false,false,false,false,false,false}",2,1,0.007995843887329102
 11,4,"62cce089eab9eaec24c9b369","cecina",1,"2022-07-12T02:46:36.306194","{true,true,true,true,true,true}",0,4,0
 12,4,"62cce089eab9eaec24c9b369","escasa",0.33333334,"2022-07-12T02:46:35.568191","{false,false,true,false,false,true}",1,3,0
 13,4,"62cce089eab9eaec24c9b369","micala",0.33333334,"2022-07-12T02:46:34.809062","{false,false,true,false,false,true}",1,2,0
@@ -31,6 +27,9 @@
 31,15,"62cf749c1e568313f37e8b4b","azufrado",0.375,"2022-07-14T01:42:54.557754","{false,false,false,false,false,true,true,true}",0,2,0
 32,15,"62cf749c1e568313f37e8b4b","padecido",0.5,"2022-07-14T01:42:53.797936","{false,false,false,false,false,false,true,true}",3,1,0.0010006427764892578
 33,16,"62cf74ad1e568313f37e8b51","recordando",1,"2022-07-14T01:43:12.139775","{true,true,true,true,true,true,true,true,true,true}",0,3,0
+8,3,"62cc7a6f15e8ce9a5cbe1508","julius",0.6666667,"2022-07-11T19:30:57.660301","{true,true,true,true,false,false}",0,3,0.0010449886322021484
+9,3,"62cc7a6f15e8ce9a5cbe1508","cabria",0.33333334,"2022-07-11T19:30:56.900558","{false,false,false,false,false,false}",2,2,0.0009987354278564453
+10,3,"62cc7a6f15e8ce9a5cbe1508","metano",0.33333334,"2022-07-11T19:30:56.158212","{false,false,false,false,false,false}",2,1,0.007995843887329102
 34,16,"62cf74ad1e568313f37e8b51","vendedores",0.2,"2022-07-14T01:43:11.377886","{false,true,false,false,false,true,false,false,false,false}",4,2,0
 35,16,"62cf74ad1e568313f37e8b51","cumplirian",0.3,"2022-07-14T01:43:10.457636","{false,false,false,false,false,false,false,false,false,false}",4,1,0
 36,17,"62cf74e31e568313f37e8b5d","conceptual",1,"2022-07-14T01:44:07.298756","{true,true,true,true,true,true,true,true,true,true}",0,4,0
@@ -1098,3 +1097,4 @@
 1098,331,"62d7024b8a215119845b3ac9","carecia",0.5714286,"2022-07-19T19:13:17.845679","{false,false,true,false,false,true,true}",1,3,0
 1099,331,"62d7024b8a215119845b3ac9","plautia",0.42857143,"2022-07-19T19:13:17.046674","{false,false,false,false,false,true,true}",3,2,0
 1100,331,"62d7024b8a215119845b3ac9","honorio",0.2857143,"2022-07-19T19:13:16.302245","{false,false,false,false,false,true,false}",1,1,0.009670019149780273
+7,3,"62cc7a6f15e8ce9a5cbe1508","julian",1,"2022-07-11T19:30:58.438205","{true,true,true,true,true,true}",0,4,0.0010249886322021484
