@@ -1419,11 +1419,8 @@ class Game_wordle:
                 print("Se encontro la palabra: "+ word_post +" en el intento: ",i+1)
                 # se almacena el tiempo de respuesta en una lista data por el post_response
                 self.end_time_post = time.time()
-                data = self.end_time_post - self.start_time_post
-                if data < 0:
-                    data = 0.0
-                else:
-                    data = data
+                data = abs(self.end_time_post - self.start_time_post)
+
                 self.times.append(data)
                 # se guarda los juegos en un archivo json y un txt
                 self.save_games("ganado")
@@ -1442,7 +1439,7 @@ class Game_wordle:
             word_post = self.random_word_filters(filter_data)
             self.end_time_post = time.time()
             # se almacena el tiempo de respuesta en una lista data por el post_response
-            self.times.append(self.end_time_post - self.start_time_post)
+            self.times.append(abs(self.end_time_post - self.start_time_post))
         
         if(len(word_post) != len(letters_true)):
             self.save_games("perdido")
